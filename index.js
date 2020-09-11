@@ -35,7 +35,7 @@ const scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly','https:/
 const client = new google.auth.OAuth2(
 	keys.web.client_id,
 	keys.web.client_secret,
-	keys.web.redirect_uris[5]
+	keys.web.redirect_uris[1]
   );
 
 this.authorizeUrl = client.generateAuthUrl({
