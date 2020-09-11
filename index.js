@@ -30,7 +30,7 @@ app.post('/testingAjax', (req, res) => {
 
 const keyfile = path.join(__dirname, 'credentials.json');
 const keys = JSON.parse(fs.readFileSync(keyfile));
-const scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly','https://www.googleapis.com/auth/spreadsheets'];
+const scopes = ['https://www.googleapis.com/auth/drive.file','https://www.googleapis.com/auth/spreadsheets.readonly','https://www.googleapis.com/auth/spreadsheets'];
 
 const client = new google.auth.OAuth2(
 	keys.web.client_id,
@@ -68,6 +68,17 @@ app.post('/createSheet',async (req,res)=>{
 	console.log(sheetID)
 	res.send(sheetID)
 
+})
+
+app.post('/downloadsheet',async (req,res)=>{
+	const downloadID="1rwhcADPOtSc5-xhfTHZOcgGxjZzoHN9F5CCGb9UNbSU"
+	const drive = google.drive({version:"v3",auth:client})
+	drive.files.get({
+		fileId:downloadID,
+		alt:"media"
+	})
+	
+	
 })
 
 

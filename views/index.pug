@@ -55,8 +55,6 @@ html
                             $("#sheet-name").attr("placeholder","Field is required")
                             return;
                         }
-
-
                         console.log("CREATING SHEET.......")
                         $.ajax({
                             url:'/createSheet',
@@ -65,6 +63,11 @@ html
                             data:{sheetname,another:"william"},
                             success:(data)=>{
                                 console.log("WORKING")
+                                 if(data){
+                                     $("#sheet-details").animate({opacity:1})
+                                     $("#sheet-url").val(data)
+                                     $("#sheet-url").prop('disabled', false);
+                                 }
                               console.log(data)
                             },
                           error:(error)=>{
@@ -102,13 +105,13 @@ html
                     button(id="createSheet" style="border-radius:10px;border:none" class="p-2 btn btn-success mt-5" ) Create Sheet
                          i.fa.fa-plus(aria-hidden='true' class="pl-2")
 
-                    div(class="form-group" class="d-flex flex-column" style="opacity:1;padding:10px" id="sheet-details")
+                    div(class="form-group" class="d-flex flex-column" style="opacity:1;padding:10px" id="sheet-name-placeholder")
                         label(for="sheet-name" class="font-weight-bold mt-2 text-light" required) NAME OF SHEET
                         input(type="text" id="sheet-name"  style="outline:none;border-radius:10px;border:none" class="p-1")
 
                     div(class="form-group" class="d-flex flex-column" style="opacity:0;padding:10px" id="sheet-details")
-                        label(for="sheet-url" class="font-weight-bold mt-2 text-light") SHEET ID
-                        input(type="text" id="sheet-url"  style="outline:none;border-radius:10px;border:none" class="p-1")
+                        label(for="sheet-url" class="font-weight-bold mt-2 text-light" ) SHEET ID
+                        input(type="text" id="sheet-url"  style="outline:none;border-radius:10px;border:none" class="p-1" disabled)
                     
                     div(class="d-flex justify-content-center align-items-center flex-column" style="opacity:0")
                         h5(class="text-success text-center mt-5")  SHEET IS READY TO DOWNLOAD
