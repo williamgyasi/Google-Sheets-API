@@ -62,7 +62,7 @@ app.post('/createSheet',async (req,res)=>{
 	const sheetData=await extra.fetchDataFromAPI()
 	const sheetHeaders=sheetData['sheetHeaders']
 	const sheetContent=sheetData['sheetValues']
-	const sheetname=req.body?.sheetname
+	const sheetname=req.body.sheetname
 
 	const sheetID=await extra.fillSheetWithAPIDATA(client,sheetData,sheetname)
 	console.log(sheetID)
