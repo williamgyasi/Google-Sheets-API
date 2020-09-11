@@ -35,7 +35,7 @@ const scopes = ['https://www.googleapis.com/auth/spreadsheets.readonly','https:/
 const client = new google.auth.OAuth2(
 	keys.web.client_id,
 	keys.web.client_secret,
-	keys.web.redirect_uris[0]
+	keys.web.redirect_uris[3]
   );
 
 this.authorizeUrl = client.generateAuthUrl({
@@ -71,7 +71,7 @@ app.post('/createSheet',async (req,res)=>{
 })
 
 
-const PORT = 8080;
+const PORT = process.env.PORT ||8080 ;
 
 app.listen(PORT, () => {
 	console.log(`App is listening on Port ${PORT}!`);
