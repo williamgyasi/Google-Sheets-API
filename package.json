@@ -1,0 +1,24 @@
+{
+  "name": "googlesheetsapi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "author": "william",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "googleapis": "^39.2.0",
+    "jade": "^1.11.0",
+    "node-fetch": "^2.6.1",
+    "open": "^7.2.1",
+    "pug": "^3.0.0",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
