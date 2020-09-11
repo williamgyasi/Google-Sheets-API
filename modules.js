@@ -1,4 +1,5 @@
 const fetch=require('node-fetch')
+const {google} = require('googleapis');
 
 function multiDimensionalUnique(arr) {
     var uniques = [];
@@ -33,6 +34,59 @@ async function fetchDataFromAPI(){
         return {sheetHeaders,sheetValues,data}
 }
 
+async function createNewSheet(auth){
+    let sheetID;
+   const resource = {
+       properties: {
+         title:"Demo Completion v1"
+       },
+     }; 
+
+   const sheets = google.sheets({version: 'v4', auth});
+   try {
+       const spreadsheetID=await sheets.spreadsheets.create({
+           resource,
+           fields:"spreadsheetId"
+       });
+
+       return spreadsheetID.data.spreadsheetId
+       
+   } catch (error) {
+       console.log("SHEETS API ERR"+error)
+       
+   }  
+}
+
+async function fillSheetWithAPIDATA(auth,employeeData){
+    const sheets = google.sheets({version: 'v4', auth});
+    let values=[...employeeData['sheetHeaders'],...employeeData['sheetValues']]
+    const spreadsheetID=await createNewSheet(auth)
+
+    const resource={
+        values,
+    }
+
+    await sheets.spreadsheets.values.update({
+        spreadsheetId:spreadsheetID,
+        range:"A1",
+        valueInputOption:"USER_ENTERED",
+        resource
+    },(err,result)=>{
+        if(err){
+            console.log(err)
+        }
+        else{
+            console.log(result)
+        }
+        
+
+    })
+ }
+
+
+
+
 module.exports={
-    fetchDataFromAPI
+    fetchDataFromAPI,
+    fillSheetWithAPIDATA
 }

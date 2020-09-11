@@ -44,7 +44,7 @@ this.authorizeUrl = client.generateAuthUrl({
   });
   
 
-app.get('/createSheet',urlencodedparser, async(req, res) => {
+app.get('/authclient',urlencodedparser, async(req, res) => {
 	const code =req.query.code;
 	client.getToken(code,(err,tokens)=>{
 		if(err){
@@ -54,14 +54,20 @@ app.get('/createSheet',urlencodedparser, async(req, res) => {
 
 		client.credentials=tokens
 		res.redirect('/')
-		
 	})
-	// const sheetData=await extra.fetchDataFromAPI()
-	// const sheetHeaders=sheetData['sheetHeaders']
-	// const sheetContent=sheetData['sheetValues']
-	// const sheetname=req.body?.sheetname
-	// console.log(sheetContent)
+	
   });
+
+app.post('/createSheet',async (req,res)=>{
+	const sheetData=await extra.fetchDataFromAPI()
+	const sheetHeaders=sheetData['sheetHeaders']
+	const sheetContent=sheetData['sheetValues']
+	const sheetname=req.body?.sheetname
+
+	extra.fillSheetWithAPIDATA(client,sheetData)
+
+})
+
 
 const PORT = 8080;
 

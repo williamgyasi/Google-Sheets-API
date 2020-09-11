@@ -119,44 +119,7 @@ function getNewToken(oAuth2Client, callback) {
  }
 
 
- 
-async function createNewSheet(auth){
-     let sheetID;
-    const resource = {
-        properties: {
-          title:"Demo Completion"
-        },
-      }; 
-    const sheets = google.sheets({version: 'v4', auth});
-    try {
-        const spreadsheetID=await sheets.spreadsheets.create({
-            resource,
-            fields:"spreadsheetId"
-        });
 
-        return spreadsheetID.data.spreadsheetId
-        // console.log(spreadsheetID.data.spreadsheetId)
-        
-    } catch (error) {
-        console.log("SHEETS API ERR"+error)
-        
-    }
-    // const spreadsheetID=await sheets.spreadsheets.create({
-    //     resource,
-    //     fields:"spreadsheetId"
-        
-    // },(err,spreedsheet)=>{
-    //     if(err){
-    //         console.log(err)
-    //     }
-    //     else{
-    //         return spreedsheet.data.spreadsheetId
-    //     }
-    // })
-
-    
-    
- }
 function listMajors(auth) {
   const sheets = google.sheets({version: 'v4', auth});
   sheets.spreadsheets.values.get({
