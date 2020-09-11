@@ -44,7 +44,8 @@ this.authorizeUrl = client.generateAuthUrl({
   });
   
 
-app.post('/createSheet',urlencodedparser, async(req, res) => {
+app.get('/createSheet',urlencodedparser, async(req, res) => {
+	
 	const code =req.query.code;
 	client.getToken(code,(err,tokens)=>{
 		if(err){
@@ -54,6 +55,7 @@ app.post('/createSheet',urlencodedparser, async(req, res) => {
 
 		client.credentials=tokens
 		res.send('Authentication successful! Please return to the console.');
+		
 	})
 	// const sheetData=await extra.fetchDataFromAPI()
 	// const sheetHeaders=sheetData['sheetHeaders']
@@ -65,5 +67,6 @@ app.post('/createSheet',urlencodedparser, async(req, res) => {
 const PORT = 8080;
 
 app.listen(PORT, () => {
+	
 	console.log(`App is listening on Port ${PORT}!`);
 });
