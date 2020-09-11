@@ -2,9 +2,6 @@
   "name": "googlesheetsapi",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "12.x"
-  },
   "main": "main.js",
   "scripts": {
     "start": "nodemon index.js"
