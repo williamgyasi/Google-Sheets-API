@@ -53,6 +53,7 @@ html
                         const sheetname=$("#sheet-name").val()
                         if(!sheetname){
                             $("#sheet-name").attr("placeholder","Field is required")
+                            return;
                         }
 
 
@@ -63,13 +64,17 @@ html
                             cache:false,
                             data:{sheetname,another:"william"},
                             success:(data)=>{
+                                console.log("WORKING")
                               console.log(data)
-                          },
+                            },
                           error:(error)=>{
                               console.log("ERROR")
                               console.log(error)
                           },
-                          
+                          complete:(complete)=>{
+                              console.log("Finished")
+
+                          }
                             
                         })  
                     })
