@@ -65,6 +65,7 @@ html
                                 console.log("WORKING")
                                  if(data){
                                      $("#sheet-details").animate({opacity:1})
+                                     $("#download-ready").animate({opacity:1})
                                      $("#sheet-url").val(data)
                                      $("#sheet-url").prop('disabled', false);
                                  }
@@ -113,10 +114,11 @@ html
                         label(for="sheet-url" class="font-weight-bold mt-2 text-light" ) SHEET ID
                         input(type="text" id="sheet-url"  style="outline:none;border-radius:10px;border:none" class="p-1" disabled)
                     
-                    div(class="d-flex justify-content-center align-items-center flex-column" style="opacity:0")
-                        h5(class="text-success text-center mt-5")  SHEET IS READY TO DOWNLOAD
-                        button(id="createSheet" style="border-radius:10px;border:none;" class="p-2 btn btn-success " ) DOWNLOAD SHEET
-                            i.fa.fa-download(aria-hidden='true' class="pl-2")
+                    div(class="d-flex justify-content-center align-items-center flex-column" id="download-ready" style="opacity:0")
+                        h5(class="text-success text-center mt-2")  SHEET IS READY TO DOWNLOAD
+                        a(href="https://docs.google.com/spreadsheets/u/0/" class="text-light text-center mt-2" style="cursor:pointer;" target="_blank") https://docs.google.com/spreadsheets/u/0/
+                        //- button(id="createSheet" style="border-radius:10px;border:none;" class="p-2 btn btn-success " ) DOWNLOAD SHEET
+                        //-     i.fa.fa-download(aria-hidden='true' class="pl-2")
 
                     
                     

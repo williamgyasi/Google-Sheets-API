@@ -20,7 +20,7 @@ async function fetchDataFromAPI(){
     
     
          const employeeData=await response.json()
-         const data=employeeData.data
+         const data=employeeData
          const headers=employeeData['data'].map((values)=>{
              return (Object.keys(values))
          })
