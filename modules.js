@@ -34,11 +34,11 @@ async function fetchDataFromAPI(){
         return {sheetHeaders,sheetValues,data}
 }
 
-async function createNewSheet(auth){
+async function createNewSheet(auth,sheetname){
     let sheetID;
    const resource = {
        properties: {
-         title:"Demo Completion v1"
+         title:sheetname
        },
      }; 
 
@@ -57,10 +57,10 @@ async function createNewSheet(auth){
    }  
 }
 
-async function fillSheetWithAPIDATA(auth,employeeData){
+async function fillSheetWithAPIDATA(auth,employeeData,sheetname){
     const sheets = google.sheets({version: 'v4', auth});
     let values=[...employeeData['sheetHeaders'],...employeeData['sheetValues']]
-    const spreadsheetID=await createNewSheet(auth)
+    const spreadsheetID=await createNewSheet(auth,sheetname)
 
     const resource={
         values,
@@ -81,6 +81,7 @@ async function fillSheetWithAPIDATA(auth,employeeData){
         
 
     })
+    return spreadsheetID;
  }
 
 

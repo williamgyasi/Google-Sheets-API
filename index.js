@@ -64,7 +64,8 @@ app.post('/createSheet',async (req,res)=>{
 	const sheetContent=sheetData['sheetValues']
 	const sheetname=req.body?.sheetname
 
-	extra.fillSheetWithAPIDATA(client,sheetData)
+	const sheetID=await extra.fillSheetWithAPIDATA(client,sheetData,sheetname)
+	console.log(sheetID)
 
 })
 
