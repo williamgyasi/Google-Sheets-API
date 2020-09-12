@@ -16,9 +16,6 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.get('/', (req, res) => {
-	res.render('index.pug')
-});
 
 app.get('/fetchAPI',async(req,res)=>{
 	res.send(await extra.fetchDataFromAPI())
@@ -44,10 +41,14 @@ const client = new google.auth.OAuth2(
 
 
 this.authorizeUrl = client.generateAuthUrl({
-	access_type: 'offline',
+	access_type: 'online',
 	scope: scopes,
   });
   
+app.get('/', (req, res) => {
+	opn(this.authorizeUrl, {wait: false});
+	res.render('index.pug')
+});
 
 app.get('/authclient', async(req, res) => {
 	const code =req.query.code;
@@ -92,6 +93,7 @@ app.post('/downloadsheet',async (req,res)=>{
 const PORT = process.env.PORT ||8080 ;
 
 app.listen(PORT, () => {
-	console.log(`App is listening on Port ${PORT}!`);
+
+	console.log(`App is listening on Port NUMBER ${PORT}!`);
 	opn(this.authorizeUrl, {wait: false});
 });
