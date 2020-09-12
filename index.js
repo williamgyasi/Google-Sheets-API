@@ -57,8 +57,9 @@ app.get('/authclient', async(req, res) => {
       		throw err;
 		}
 
-		client.credentials=tokens
+		// client.credentials=tokens
 		client.setCredentials(tokens)
+		// console.log(tokens.access_token)
 		res.redirect('/')
 	})
 	
