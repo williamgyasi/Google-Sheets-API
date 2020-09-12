@@ -41,13 +41,14 @@ const client = new google.auth.OAuth2(
 
 
 this.authorizeUrl = client.generateAuthUrl({
-	access_type: 'online',
+	access_type: "offline",
 	scope: scopes,
   });
   
 app.get('/', (req, res) => {
 	opn(this.authorizeUrl, {wait: false});
 	res.render('index.pug')
+	console.log("APP HAS STARTED")
 });
 
 app.get('/authclient', async(req, res) => {
