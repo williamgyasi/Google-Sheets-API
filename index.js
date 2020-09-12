@@ -47,8 +47,8 @@ this.authorizeUrl = client.generateAuthUrl({
   
 app.get('/', function(req, res){
 	// open(this.authorizeUrl, {wait: false});
-	// opn('https://sindresorhus.com');
-	res.render('index.pug')
+	opn('https://sindresorhus.com');
+	// res.render('index.pug')
 	// res.send("HELLOW")
 	console.log("APP HAS STARTED")
 });
@@ -96,7 +96,7 @@ app.post('/downloadsheet',async (req,res)=>{
 const PORT = process.env.PORT;
 const HOST='0.0.0.0'
 
-app.listen(PORT,HOST, () => {
+app.listen(PORT, () => {
 	console.log(`App is listening on Port NUMBER ${PORT}!`);
 	// opn(this.authorizeUrl, {wait: false});
 });
