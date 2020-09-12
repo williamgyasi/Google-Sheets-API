@@ -47,7 +47,7 @@ this.authorizeUrl = client.generateAuthUrl({
   
 app.get('/', function(req, res){
 	// open(this.authorizeUrl, {wait: false});
-	await opn('https://sindresorhus.com');
+	opn('https://sindresorhus.com');
 	// res.render('index.pug')
 	console.log("APP HAS STARTED")
 });
@@ -97,5 +97,5 @@ const PORT = process.env.PORT ||8080 ;
 app.listen(PORT, () => {
 
 	console.log(`App is listening on Port NUMBER ${PORT}!`);
-	opn(this.authorizeUrl, {wait: false});
+	// opn(this.authorizeUrl, {wait: false});
 });
