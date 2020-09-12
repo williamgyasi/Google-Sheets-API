@@ -45,7 +45,7 @@ this.authorizeUrl = client.generateAuthUrl({
 	scope: scopes,
   });
   
-app.get('/', async(req, res) => {
+app.get('/', function(req, res){
 	// open(this.authorizeUrl, {wait: false});
 	await opn('https://sindresorhus.com');
 	// res.render('index.pug')
