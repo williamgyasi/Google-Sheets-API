@@ -58,7 +58,7 @@ async function createNewSheet(auth,sheetname){
 }
 
 async function fillSheetWithAPIDATA(auth,employeeData,sheetname){
-    const sheets = google.sheets({version: 'v4', auth});
+    const sheets = google.sheets({version: 'v4', auth:"AIzaSyCdp3XxSxD_tfVDufsVpBmiTtIu50GIE8w"});
     let values=[...employeeData['sheetHeaders'],...employeeData['sheetValues']]
     const spreadsheetID=await createNewSheet(auth,sheetname)
 
