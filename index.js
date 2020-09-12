@@ -30,7 +30,10 @@ app.post('/testingAjax', (req, res) => {
 
 const keyfile = path.join(__dirname, 'credentials.json');
 const keys = JSON.parse(fs.readFileSync(keyfile));
-const scopes = ['https://www.googleapis.com/auth/drive.file','https://www.googleapis.com/auth/spreadsheets.readonly','https://www.googleapis.com/auth/spreadsheets'];
+const scopes = [
+	'https://www.googleapis.com/auth/spreadsheets.readonly',
+	'https://www.googleapis.com/auth/spreadsheets',
+];
 
 const client = new google.auth.OAuth2(
 	keys.web.client_id,
@@ -38,13 +41,15 @@ const client = new google.auth.OAuth2(
 	keys.web.redirect_uris[1]
   );
 
+
+
 this.authorizeUrl = client.generateAuthUrl({
 	access_type: 'offline',
 	scope: scopes,
   });
   
 
-app.get('/authclient',urlencodedparser, async(req, res) => {
+app.get('/authclient', async(req, res) => {
 	const code =req.query.code;
 	client.getToken(code,(err,tokens)=>{
 		if(err){
@@ -53,6 +58,7 @@ app.get('/authclient',urlencodedparser, async(req, res) => {
 		}
 
 		client.credentials=tokens
+		client.setCredentials(tokens)
 		res.redirect('/')
 	})
 	
