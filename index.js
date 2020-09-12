@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path =require('path')
 const bodyParser=require('body-parser')
-const opn = require('open');
+const opn = require('opn');
 const {google} = require('googleapis');
 const urlencodedparser = bodyParser.urlencoded({extended:false})
 const fs = require('fs');
@@ -45,8 +45,9 @@ this.authorizeUrl = client.generateAuthUrl({
 	scope: scopes,
   });
   
-app.get('/', (req, res) => {
-	opn(this.authorizeUrl, {wait: false});
+app.get('/', async(req, res) => {
+	// open(this.authorizeUrl, {wait: false});
+	await opn('https://sindresorhus.com');
 	res.render('index.pug')
 	console.log("APP HAS STARTED")
 });
