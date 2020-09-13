@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const path =require('path')
 const bodyParser=require('body-parser')
-const opn = require('open');
+const opn = require('opn');
 const {google} = require('googleapis');
 const urlencodedparser = bodyParser.urlencoded({extended:false})
 const fs = require('fs');
@@ -35,7 +35,7 @@ const scopes = [
 const client = new google.auth.OAuth2(
 	keys.web.client_id,
 	keys.web.client_secret,
-	keys.web.redirect_uris[1]
+	keys.web.redirect_uris[5]
   );
 
 
@@ -45,13 +45,10 @@ this.authorizeUrl = client.generateAuthUrl({
 	scope: scopes,
   });
   
-app.get('/', function(req, res){
-	// opn(this.authorizeUrl, {wait: false});
+app.get('/', async(req, res) => {
 	// open(this.authorizeUrl, {wait: false});
-	// opn('https://sindresorhus.com',{app:"firefox"});
-	// res.redirect('/authclient')
+	await opn('https://sindresorhus.com');
 	res.render('index.pug')
-	// res.send("HELLOW")
 	console.log("APP HAS STARTED")
 });
 
@@ -95,11 +92,10 @@ app.post('/downloadsheet',async (req,res)=>{
 })
 
 
-const PORT = process.env.PORT || 8080;
-const HOST='0.0.0.0'
+const PORT = process.env.PORT ||8080 ;
 
 app.listen(PORT, () => {
+
 	console.log(`App is listening on Port NUMBER ${PORT}!`);
 	opn(this.authorizeUrl, {wait: false});
-	console.log('UPPER REQUEST COMPLETE')
 });

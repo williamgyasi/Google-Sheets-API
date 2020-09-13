@@ -1,7 +1,7 @@
 {
   "name": "googlesheetsapi",
   "version": "1.0.0",
-  "description": "a simple Google Sheet Demo",
+  "description": "",
   "main": "main.js",
   "scripts": {
     "start": "nodemon index.js"
