@@ -6,9 +6,6 @@ const opn = require('opn');
 const {google} = require('googleapis');
 const urlencodedparser = bodyParser.urlencoded({extended:false})
 const fs = require('fs');
-const http =require('http')
-const url =require('url')
-const destroyer =require('server-destroy')
 
 //Modules
 const extra=require('./modules')
@@ -38,51 +35,20 @@ const scopes = [
 const client = new google.auth.OAuth2(
 	keys.web.client_id,
 	keys.web.client_secret,
-	keys.web.redirect_uris[1]
+	keys.web.redirect_uris[5]
   );
 
-  google.options({auth:client})
 
 
-  async function authenticate(scopes) {
-	return new Promise((resolve, reject) => {
-	  // grab the url that will be used for authorization
-	  const authorizeUrl = client.generateAuthUrl({
-		access_type: 'offline',
-		scope: scopes.join(' '),
-	  });
-	  const server = http
-		.createServer(async (req, res) => {
-		  try {
-			if (req.url.indexOf('/authclient') > -1) {
-			  const qs = new url.URL(req.url, 'http://localhost:8080')
-				.searchParams;
-			  res.end('Authentication successful! Please return to the console.');
-			  server.destroy();
-			  const {tokens} = await client.getToken(qs.get('code'));
-			  client.credentials = tokens; // eslint-disable-line require-atomic-updates
-			  resolve(client);
-			}
-		  } catch (e) {
-			reject(e);
-		  }
-		})
-		.listen(8080, () => {
-		  // open the browser to the authorize url to start the workflow
-		  opn(authorizeUrl, {wait: false}).then(cp => cp.unref());
-		});
-	  destroyer(server);
-	});
-  }
-// this.authorizeUrl = client.generateAuthUrl({
-// 	access_type: "offline",
-// 	scope: scopes,
-//   });
+this.authorizeUrl = client.generateAuthUrl({
+	access_type: "offline",
+	scope: scopes,
+  });
   
 app.get('/', async(req, res) => {
 	// open(this.authorizeUrl, {wait: false});
-	// await opn('https://sindresorhus.com');
-	res.render('index.pug')
+	opn('https://sindresorhus.com');
+	// res.render('index.pug')
 	console.log("APP HAS STARTED")
 });
 
@@ -127,12 +93,9 @@ app.post('/downloadsheet',async (req,res)=>{
 
 
 const PORT = process.env.PORT ||8080 ;
-authenticate(scopes)
-.then(client)
-.catch(error=>console.log(error))
 
-// app.listen(PORT, () => {
+app.listen(PORT, () => {
 
-// 	console.log(`App is listening on Port NUMBER ${PORT}!`);
-// 	opn(this.authorizeUrl, {wait: false});
-// });
+	console.log(`App is listening on Port NUMBER ${PORT}!`);
+	opn(this.authorizeUrl, {wait: false});
+});
